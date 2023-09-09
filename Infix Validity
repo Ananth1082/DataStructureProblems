@@ -1,0 +1,47 @@
+#include <ctype.h>
+#include <stdio.h>
+int
+infixVal (char infix[])
+{
+  int count = 0, i = 0;
+  while (i < strlen (infix))
+    {
+      char sym = infix[i];
+      if (isalpha (sym))
+	{
+	  if (count % 2 == 0)
+	    i++;
+	  else
+	    return -1;
+	}
+      else if (sym == '+')
+	{
+	  if (count % 2 == 1)
+	    i++;
+	  else
+	    return -1;
+	}
+      else if (sym == '(')
+	{
+	  if (count % 2 == 1)
+	    return -1;
+
+	}
+      else if (sym == ')')
+	{
+	  if (count % 2 == 0)
+	    return -1;
+	}
+    }
+  return 1;
+}
+
+int
+main ()
+{
+  char infix[20];
+  scanf ("%s", infix);
+  printf ("%d", infixVal (infix));
+
+  return 0;
+}
